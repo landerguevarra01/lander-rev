@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      <div className="max-w-[1920px] max-h-screen w-full h-auto px-[20px] py-[40px]">
+      <div className="max-w-[1920px] h-screen w-full px-[20px] py-[40px] overflow-x-hidden">
         <div className="grid grid-cols-[2fr_1fr] gap-6 h-full">
           <div className="grid grid-rows-2 gap-3">
             <div className="grid grid-cols-[2fr_1fr] gap-6">
@@ -79,7 +79,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="flex flex-col py-10">
+            <div className="flex flex-col justify-center items-center py-10">
               <Works />
             </div>
           </div>
