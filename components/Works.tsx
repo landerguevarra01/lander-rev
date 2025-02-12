@@ -1,19 +1,28 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cards";
-
 import "../app/globals.css";
-
-// import required modules
 import { EffectCards } from "swiper/modules";
+import Image from "next/image";
 
 export default function App() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const slideTexts = [
+    "sansan",
+    "slide 2",
+    "slide 3",
+    "slide 4",
+    "slide 5",
+    "slide 6",
+    "slide 7",
+    "slide 8",
+    "slide 9",
+  ];
+
   return (
     <>
       <Swiper
@@ -21,8 +30,22 @@ export default function App() {
         grabCursor={true}
         modules={[EffectCards]}
         className="mySwiper"
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>
+          <a
+            href="https://sansan-three.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/assets/works/sansan.png"
+              alt="sansan works"
+              layout="fill"
+              objectFit="cover"
+            />
+          </a>
+        </SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
@@ -32,6 +55,8 @@ export default function App() {
         <SwiperSlide>Slide 8</SwiperSlide>
         <SwiperSlide>Slide 9</SwiperSlide>
       </Swiper>
+
+      <p>{slideTexts[activeIndex]}</p>
     </>
   );
 }

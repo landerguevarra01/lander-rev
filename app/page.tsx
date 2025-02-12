@@ -45,13 +45,13 @@ export default function Home() {
                     Contact Me
                   </div>
                   <div className="flex flex-col justify-end items-end mb-2 text-[24px] font-poppins font-normal space-y-2">
-                    <a
+                    {/* <a
                       href="https://www.facebook.com/lander.guevarra.9"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <h6 className="hover:underline">FACEBOOK</h6>
-                    </a>
+                    </a> */}
                     <a
                       href="https://www.linkedin.com/in/lander-guevarra21/"
                       target="_blank"
@@ -79,7 +79,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center py-10">
+            <div className="flex flex-col justify-center items-center">
               <Works />
             </div>
           </div>
