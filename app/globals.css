@@ -14,6 +14,23 @@
   }
 }
 
+@layer base {
+
+  html,
+  body {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .container {
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -22,12 +39,10 @@ body {
 
 ::selection {
   background: #815C4F;
-  /* Change this to your desired highlight color */
   color: #ffffff;
-  /* Change text color for better contrast */
 }
 
-.swiper {
+/* .swiper {
   width: 338px;
   height: 450px;
 }
@@ -81,3 +96,5 @@ body {
 .swiper-slide:nth-child(10n) {
   background-color: rgb(54, 94, 77);
 }
+
+ */
