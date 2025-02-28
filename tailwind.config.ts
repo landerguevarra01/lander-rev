@@ -14,6 +14,7 @@ export default {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        jetbrains: ["JetBrains Mono", "monospace"],
       },
     },
   },

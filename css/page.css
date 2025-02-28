@@ -94,3 +94,13 @@ body {
     grid-row: 2 / 3;
     grid-column: 1 / 2;
 }
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.animate-blink {
+    animation: blink 0.8s step-end infinite;
+}
