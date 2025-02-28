@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import { DndContext, closestCenter, DragOverlay } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
@@ -9,13 +8,14 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useState } from "react";
 import Image from "next/image";
-import "../app/page.css";
+import "../css/page.css";
 
 const itemsData = [
   { id: "intro", label: "Introduction" },
   { id: "image", label: "Image", isImage: true },
-  { id: "blog", label: "Blog and Articles" },
+  // { id: "blog", label: "Blog and Articles" },
   { id: "works", label: "Works" },
   { id: "experience", label: "Work Experience" },
   { id: "testimonials", label: "Testimonials" },
@@ -24,15 +24,7 @@ const itemsData = [
   { id: "skills", label: "Skills and Technologies" },
 ];
 
-const SortableItem = ({
-  id,
-  label,
-  isImage,
-}: {
-  id: string;
-  label: string;
-  isImage?: boolean;
-}) => {
+const SortableItem = ({ id, label, isImage }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -67,9 +59,16 @@ const SortableItem = ({
 
 const LandingPage = () => {
   const [items, setItems] = useState(itemsData);
+  const [activeItem, setActiveItem] = useState(null);
 
-  const handleDragEnd = (event: any) => {
+  const handleDragStart = (event) => {
+    setActiveItem(items.find((item) => item.id === event.active.id));
+  };
+
+  const handleDragEnd = (event) => {
     const { active, over } = event;
+    setActiveItem(null);
+
     if (!over || active.id === over.id) return;
 
     const oldIndex = items.findIndex((item) => item.id === active.id);
@@ -78,7 +77,11 @@ const LandingPage = () => {
   };
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <SortableContext
         items={items.map((item) => item.id)}
         strategy={verticalListSortingStrategy}
@@ -94,6 +97,24 @@ const LandingPage = () => {
           ))}
         </div>
       </SortableContext>
+      <DragOverlay>
+        {activeItem ? (
+          <div className="item overlay">
+            {activeItem.isImage ? (
+              <div className="relative overflow-hidden w-full h-full">
+                <Image
+                  src="/assets/me/_DSC8035.JPG"
+                  alt="Person Image"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              activeItem.label
+            )}
+          </div>
+        ) : null}
+      </DragOverlay>
     </DndContext>
   );
 };
